@@ -72,8 +72,10 @@ LumenLauncher/
     AppEntry.java, Ui.java             small helpers
   app/src/main/res/                    layout, vector icons, colours, strings
 tv-tools/                              backup, debloat and restore scripts (PowerShell)
-docs/                                  guides and README images
+docs/                                  guides and README images (also published to the wiki)
 .github/workflows/build.yml            CI and releases
+.github/workflows/wiki.yml             republishes the wiki when docs/ or README.md change
+.github/scripts/build_wiki.py          converts docs/ into wiki pages
 ```
 
 ## Design notes

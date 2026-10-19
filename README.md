@@ -87,6 +87,9 @@ the download, updating, and uninstalling safely.
 | [Releasing](docs/RELEASING.md) | Signing key, repository secrets, and publishing a release |
 | [Changelog](CHANGELOG.md) | What changed in each version |
 
+The same guides are on the [wiki](https://github.com/anand34577/lumen-tv-launcher/wiki), which is
+updated automatically from `docs/`.
+
 ## Compatibility
 
 | | |
