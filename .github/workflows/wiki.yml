@@ -1,0 +1,52 @@
+name: Wiki
+
+# Republishes the wiki from docs/ and README.md whenever they change on main.
+# Edit the files in the repository; direct wiki edits are overwritten on the next run.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/scripts/build_wiki.py'
+      - '.github/workflows/wiki.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wiki
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check out the wiki
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          git clone "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" wiki || {
+            echo "::error::The wiki repository doesn't exist yet. Open the Wiki tab, create any first page once, then re-run this workflow."
+            exit 1
+          }
+
+      - name: Build pages
+        run: python3 .github/scripts/build_wiki.py . wiki "$GITHUB_REPOSITORY"
+
+      - name: Publish
+        working-directory: wiki
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Wiki is already up to date."
+            exit 0
+          fi
+          git commit -m "Update wiki from ${GITHUB_SHA::7}"
+          git push
