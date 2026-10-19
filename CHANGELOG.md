@@ -14,3 +14,4 @@ First public release.
 - Compact pop-up menus anchored to the button or app that opened them
 - Settings apps are reachable from the gear instead of being duplicated in the grid
 - TV tools: backup, reversible debloat profile, and one-step restore
+- Documentation for installing, using, troubleshooting and building, also published on the wiki
