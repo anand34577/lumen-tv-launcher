@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:fadingEdgeLength="48dp"
+    android:fillViewport="true"
+    android:overScrollMode="never"
+    android:requiresFadingEdge="vertical"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/pad_h"
+        android:paddingTop="32dp"
+        android:paddingEnd="@dimen/pad_h"
+        android:paddingBottom="56dp">
+
+        <!-- Top bar: clock + quick actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/clock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
+                    android:textColor="@color/text_primary"
+                    android:textSize="54sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="15sp" />
+
+                <!-- Status alerts: no internet, low storage... -->
+                <LinearLayout
+                    android:id="@+id/alerts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:clipChildren="false"
+                    android:orientation="horizontal"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/net"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:drawableStart="@drawable/ic_wifi"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <FrameLayout
+                android:id="@+id/btn_notifs"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/icon_button_bg"
+                android:clickable="true"
+                android:clipChildren="false"
+                android:contentDescription="@string/notifications"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:duplicateParentState="true"
+                    android:importantForAccessibility="no"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_bell"
+                    android:tint="@color/icon_button_tint" />
+
+                <TextView
+                    android:id="@+id/badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/badge_bg"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:minWidth="18dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/ink"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/btn_search"
+                style="@style/Lumen.IconButton"
+                android:contentDescription="@string/search"
+                android:src="@drawable/ic_mic" />
+
+            <ImageView
+                android:id="@+id/btn_inputs"
+                style="@style/Lumen.IconButton"
+                android:contentDescription="@string/inputs"
+                android:src="@drawable/ic_input" />
+
+            <ImageView
+                android:id="@+id/btn_settings"
+                style="@style/Lumen.IconButton"
+                android:contentDescription="@string/settings"
+                android:src="@drawable/ic_settings" />
+        </LinearLayout>
+
+        <!-- Favourites -->
+        <TextView
+            style="@style/Lumen.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/favourites" />
+
+        <HorizontalScrollView
+            android:id="@+id/fav_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/neg_pad_h"
+            android:layout_marginEnd="@dimen/neg_pad_h"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/pad_h"
+            android:paddingTop="14dp"
+            android:paddingEnd="@dimen/pad_h"
+            android:paddingBottom="6dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/fav_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- Recently opened (not already in Favourites) -->
+        <TextView
+            android:id="@+id/recent_header"
+            style="@style/Lumen.Section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="@string/recent"
+            android:visibility="gone" />
+
+        <HorizontalScrollView
+            android:id="@+id/recent_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/neg_pad_h"
+            android:layout_marginEnd="@dimen/neg_pad_h"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/pad_h"
+            android:paddingTop="14dp"
+            android:paddingEnd="@dimen/pad_h"
+            android:paddingBottom="6dp"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/recent_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- All apps -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Lumen.Section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apps" />
+
+            <TextView
+                android:id="@+id/app_count"
+                style="@style/Lumen.Section"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:alpha="0.6" />
+
+            <TextView
+                android:id="@+id/hidden_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:background="@drawable/chip_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/row_text_light"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:clipChildren="false"
+            android:useDefaultMargins="false" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,24 @@
+# Build output
+build/
+dist/
+.gradle/
+*.apk
+*.aab
+
+# Local machine / IDE
+local.properties
+.idea/
+*.iml
+.DS_Store
+*.log
+
+# Signing material - never commit
+keystore.properties
+*.jks
+*.keystore
+
+# Device snapshots taken by tv-tools/backup.ps1 (device-specific, may contain identifiers)
+backups/
+
+# Local TV address for tv-tools
+tv-tools/device.txt

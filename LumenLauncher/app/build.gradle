@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.lumen.tvlauncher'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.lumen.tvlauncher'
+        minSdk 26
+        targetSdk 34
+        versionCode 3
+        versionName '1.2.0'
+    }
+
+    // Release signing comes from keystore.properties (local, git-ignored) or from
+    // ANDROID_KEYSTORE_PATH, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS and
+    // ANDROID_KEY_PASSWORD environment variables (CI). Without either, the release APK is unsigned.
+    def signing = new Properties()
+    def signingFile = rootProject.file('keystore.properties')
+    if (signingFile.exists()) signingFile.withInputStream { signing.load(it) }
+    def storePath = signing['storeFile'] ?: System.getenv('ANDROID_KEYSTORE_PATH')
+
+    signingConfigs {
+        if (storePath) {
+            release {
+                storeFile rootProject.file(storePath)
+                storePassword signing['storePassword'] ?: System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias signing['keyAlias'] ?: System.getenv('ANDROID_KEY_ALIAS')
+                keyPassword signing['keyPassword'] ?: System.getenv('ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            if (storePath) signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError false
+    }
+}

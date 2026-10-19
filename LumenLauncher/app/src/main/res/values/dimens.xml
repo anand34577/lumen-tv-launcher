@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pad_h">56dp</dimen>
+    <dimen name="neg_pad_h">-56dp</dimen>
+    <dimen name="gap">20dp</dimen>
+    <dimen name="card_radius">10dp</dimen>
+</resources>

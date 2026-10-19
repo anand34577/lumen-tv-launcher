@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text_primary">#F2F4F8</color>
+    <color name="text_secondary">#8B93A7</color>
+    <color name="ink">#0B0E14</color>
+    <color name="accent">#8EA8FF</color>
+    <color name="surface">#1A1F2B</color>
+    <color name="panel">#141925</color>
+    <color name="chip">#17FFFFFF</color>
+    <color name="alert_amber">#FFC266</color>
+    <color name="alert_red">#FF8A80</color>
+</resources>
